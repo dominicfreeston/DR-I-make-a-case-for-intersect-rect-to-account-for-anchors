@@ -147,7 +147,7 @@ class Game
     # determine collision if the sword is at it's point of damaging
     return unless slash_can_damage?
 
-    state.enemies.reject! { |e| e.intersect_rect? player.slash_collision_rect }
+    state.enemies.reject! { |e| (to_collision_rect e).intersect_rect? (to_collision_rect player.slash_collision_rect) }
   end
 
   def slash_complete?
@@ -193,3 +193,12 @@ def tick args
 end
 
 $gtk.reset
+
+def to_collision_rect rect
+  {
+  x: rect.x - rect.w * (rect.anchor_x || 0),
+  y: rect.y - rect.h * (rect.anchor_y || 0),
+  w: rect.w,
+  h: rect.h,
+  }
+end
