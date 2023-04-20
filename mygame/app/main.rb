@@ -122,8 +122,8 @@ class Game
     # movement
     if vector = inputs.directional_vector
       state.debug_label = vector
-      player.dir_x = vector.x
-      player.dir_y = vector.y
+      player.dir_x = vector.x if vector.x != 0
+      player.dir_y = vector.y if vector.y != 0
       player.is_moving = true
     else
       state.debug_label = vector
