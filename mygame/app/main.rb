@@ -66,7 +66,7 @@ class Game
     tile_index   = player.slash_at.frame_index(5, player.slash_frames.idiv(5), false) || 0
 
     {
-      x: player.x + 9.25,
+      x: player.x + player.dir_x.sign * 9.25,
       y: player.y + 9.25,
       w: 165,
       h: 165,
