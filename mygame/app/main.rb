@@ -132,26 +132,14 @@ class Game
   end
 
   def calc_slash
-    # re-calc the location of the swords collision box
-    if player.dir_x.positive?
-      player.slash_collision_rect = {x: player.x + 52,
-                                     y: player.y,
-                                     w: 40,
-                                     h: 20,
-                                     anchor_x: 0.5,
-                                     anchor_y: 0.5,
-                                     path: "sprites/debug-slash.png"
-                                    }
-    else
-      player.slash_collision_rect = {x: player.x - 52,
-                                     y: player.y, 
-                                     w: 40,
-                                     h: 20,
-                                     anchor_x: 0.5,
-                                     anchor_y: 0.5,
-                                     path: "sprites/debug-slash.png"
-                                    }
-    end
+    player.slash_collision_rect = {x: player.x + player.dir_x.sign * 52,
+                                   y: player.y,
+                                   w: 40,
+                                   h: 20,
+                                   anchor_x: 0.5,
+                                   anchor_y: 0.5,
+                                   path: "sprites/debug-slash.png"
+                                  }
 
     # recalc sword's slash state
     player.slash_at = nil if slash_complete?
